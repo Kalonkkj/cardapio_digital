@@ -162,20 +162,14 @@ const data = {
 ["Vinho Tinto Gran Reserva","Tinto complexo e longo",175]
 ]};
 
-const imageByCategory = {
-"ENTRADAS":"https://images.unsplash.com/photo-1547592180-85f173990554?auto=format&fit=crop&w=800&q=80",
-"PRATO PRINCIPAL":"https://images.unsplash.com/photo-1544025162-d76694265947?auto=format&fit=crop&w=800&q=80",
-"SOBREMESAS":"https://images.unsplash.com/photo-1551024506-0bccd828d307?auto=format&fit=crop&w=800&q=80",
-"BEBIDAS":"https://images.unsplash.com/photo-1544145945-f90425340c7e?auto=format&fit=crop&w=800&q=80",
-"CARTA DE VINHOS":"https://images.unsplash.com/photo-1510812431401-41d2bd2722f3?auto=format&fit=crop&w=800&q=80"
-};
+const imageExt = {"p071":".jfif","p100":".jfif"};
 
 const products = [];
 let productCounter = 1;
-categories.forEach(cat => data[cat].forEach((p,i) => products.push({
-  id: `p${String(productCounter++).padStart(3,"0")}`, name:p[0], desc:p[1], price:p[2], category:cat,
-  image:imageByCategory[cat]
-})));
+categories.forEach(cat => data[cat].forEach((p,i) => {
+  const id = `p${String(productCounter++).padStart(3,"0")}`;
+  products.push({ id, name:p[0], desc:p[1], price:p[2], category:cat, image:`imagens/${id}${imageExt[id] || ".png"}` });
+}));
 
 let cart = JSON.parse(localStorage.getItem("saborArteCart") || "{}");
 
